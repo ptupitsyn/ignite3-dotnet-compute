@@ -7,6 +7,11 @@ x-ignite-def:
   image: apacheignite/ignite:3.1.0
   volumes:
     - ./node-config.json:/opt/ignite/etc/ignite-config.conf
+  healthcheck:
+    test: [ "CMD", "curl", "-f", "http://localhost:10300/management/v1/cluster/state" ]
+    interval: 1s
+    timeout: 10s
+    retries: 3
 
 services:
   node1:
@@ -34,7 +39,7 @@ services:
     image: apacheignite/ignite:3.1.0
     depends_on:
       node1:
-        condition: service_started
+        condition: service_healthy
 
     command: ["cli", "cluster", "init", "--name=mycluster"]
     network_mode: host

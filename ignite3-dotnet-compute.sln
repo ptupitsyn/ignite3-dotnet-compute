@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgniteCompute.Jobs", "Ignit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgniteCompute.Benchmarks", "IgniteCompute.Benchmarks\IgniteCompute.Benchmarks.csproj", "{D5A23345-6785-4776-BAC6-8DC5B5FA61A2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{90D8D604-B7BE-46B1-A6CC-3AC40A1CC478}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		node-config.json = node-config.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
