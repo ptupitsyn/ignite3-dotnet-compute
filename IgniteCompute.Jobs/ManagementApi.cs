@@ -20,11 +20,8 @@ public static class ManagementApi
             content.Add(fileContent, "unitContent", fileName: Path.GetFileName(file));
         }
 
-        var request = new HttpRequestMessage(HttpMethod.Post, url.ToString())
-        {
-            Content = content
-        };
-
+        using var request = new HttpRequestMessage(HttpMethod.Post, url.ToString());
+        request.Content = content;
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         using var client = new HttpClient();

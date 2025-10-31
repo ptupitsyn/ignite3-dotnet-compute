@@ -14,7 +14,7 @@ public class RuntimeInfoJob : IComputeJob<object?, RuntimeInfo>
         var info = new RuntimeInfo(
             Os: Environment.OSVersion,
             OsArch: System.Runtime.InteropServices.RuntimeInformation.OSArchitecture,
-            CpuArh: System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture,
+            CpuArсh: System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture,
             MachineName: Environment.MachineName,
             FrameworkDescription: System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
 

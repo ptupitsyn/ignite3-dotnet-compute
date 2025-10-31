@@ -5,6 +5,6 @@ namespace IgniteCompute.Jobs;
 public record RuntimeInfo(
     OperatingSystem Os,
     Architecture OsArch,
-    Architecture CpuArh,
+    Architecture CpuArсh,
     string MachineName,
     string FrameworkDescription);
