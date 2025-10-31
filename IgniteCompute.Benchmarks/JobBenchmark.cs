@@ -30,10 +30,7 @@ public class JobBenchmark
     [Benchmark]
     public async Task ExecuteCounterJob()
     {
-        var cfg = new IgniteClientConfiguration("localhost");
-        using var client = await IgniteClient.StartAsync(cfg);
-
-        var counterExec = await client.Compute.SubmitAsync(_target, _counterJobDescriptor, arg: null);
+        var counterExec = await _client.Compute.SubmitAsync(_target, _counterJobDescriptor, arg: null);
         await counterExec.GetResultAsync();
     }
 }
