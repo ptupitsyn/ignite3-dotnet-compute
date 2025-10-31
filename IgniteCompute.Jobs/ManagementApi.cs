@@ -20,8 +20,11 @@ public static class ManagementApi
             content.Add(fileContent, "unitContent", fileName: Path.GetFileName(file));
         }
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, url.ToString());
-        request.Content = content;
+        var request = new HttpRequestMessage(HttpMethod.Post, url.ToString())
+        {
+            Content = content
+        };
+
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         using var client = new HttpClient();
@@ -32,6 +35,8 @@ public static class ManagementApi
         {
             throw new Exception($"Failed to deploy unit. Status code: {response.StatusCode}, Content: {resContent}");
         }
+
+        await Task.Delay(500); // Wait for the unit to be fully deployed.
 
         return new DeploymentUnit(unitId, unitVersion);
     }
