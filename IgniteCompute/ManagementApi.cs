@@ -46,9 +46,9 @@ public class ManagementApi
         await client.DeleteAsync(GetUnitUrl(unit.Name, unit.Version).Uri);
     }
 
-    public static async Task<DeploymentUnit> DeployCallingAssembly(string unitId, string? unitVersion = null)
+    public static async Task<DeploymentUnit> DeployExecutingAssembly(string unitId, string? unitVersion = null)
     {
-        var testsDll = Assembly.GetCallingAssembly().Location;
+        var testsDll = Assembly.GetExecutingAssembly().Location;
 
         var unitVersion0 = unitVersion ?? GetRandomUnitVersion();
 
