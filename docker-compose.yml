@@ -8,7 +8,7 @@ x-ignite-def:
   volumes:
     - ./node-config.json:/opt/ignite/etc/ignite-config.conf
   healthcheck:
-    test: [ "CMD", "curl", "-f", "http://127.0.0.1:10300/management/v1/node/state" ]
+    test: [ "CMD", "docker-entrypoint.sh", "cli", "node", "status" ]
     interval: 1s
     timeout: 10s
     retries: 10
@@ -40,7 +40,10 @@ services:
     depends_on:
       node1:
         condition: service_healthy
-
+      node2:
+        condition: service_healthy
+      node3:
+        condition: service_healthy
     command: ["cli", "cluster", "init", "--name=mycluster"]
     network_mode: host
     restart: "no"
