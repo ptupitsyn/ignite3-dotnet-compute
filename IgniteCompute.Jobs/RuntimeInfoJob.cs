@@ -1,9 +1,13 @@
 using Apache.Ignite.Compute;
+using Apache.Ignite.Marshalling;
 
 namespace IgniteCompute.Jobs;
 
 public class RuntimeInfoJob : IComputeJob<object?, RuntimeInfo>
 {
+    // Use JSON marshaller to pass complex types.
+    public IMarshaller<RuntimeInfo> ResultMarshaller => new JsonMarshaller<RuntimeInfo>();
+
     public ValueTask<RuntimeInfo> ExecuteAsync(IJobExecutionContext context, object? arg, CancellationToken cancellationToken)
     {
         // Collect OS and runtime information here.
