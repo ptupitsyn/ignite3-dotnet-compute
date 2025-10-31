@@ -28,3 +28,18 @@ foreach (var exec in broadcastExec.JobExecutions)
     RuntimeInfo info = await exec.GetResultAsync();
     Console.WriteLine($"Node: {exec.Node}, Runtime info: {info}");
 }
+
+// Jobs can use Ignite API to work with tables, call other jobs, etc.
+// TODO
+
+// Job contexts are cached and statics are preserved between job executions on the same node.
+var counterJobDesc = JobDescriptor.Of(new CounterJob()) with { DeploymentUnits = [deploymentUnit] };
+var singleNodeTarget = JobTarget.Node(nodes.First());
+
+for (int i = 0; i < 5; i++)
+{
+    var counterExec = await client.Compute.SubmitAsync(singleNodeTarget, counterJobDesc, arg: null);
+    int invokeCount = await counterExec.GetResultAsync();
+
+    Console.WriteLine($"Counter job invocation {i + 1}, result: {invokeCount}");
+}
