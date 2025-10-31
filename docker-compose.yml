@@ -8,10 +8,10 @@ x-ignite-def:
   volumes:
     - ./node-config.json:/opt/ignite/etc/ignite-config.conf
   healthcheck:
-    test: [ "CMD", "curl", "-f", "http://localhost:10300/management/v1/cluster/state" ]
+    test: [ "CMD", "curl", "-f", "http://127.0.0.1:10300/management/v1/node/state" ]
     interval: 1s
     timeout: 10s
-    retries: 3
+    retries: 10
 
 services:
   node1:
