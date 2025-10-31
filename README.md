@@ -4,6 +4,7 @@ Start the cluster and run the demo:
 
 ```bash
 docker-compose up -d
-dotnet run IgniteCompute
+cd IgniteCompute
+dotnet run
 ```
 
