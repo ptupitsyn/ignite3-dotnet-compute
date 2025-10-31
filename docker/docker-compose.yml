@@ -28,6 +28,15 @@ services:
       - 10302:10300
       - 10802:10800
 
-# Init cluster:
-# docker run --rm -it --network=host apacheignite/ignite:3.1.0 cli
-# cluster init --name=mycluster
+  # Init cluster:
+  # docker run --rm -it --network=host apacheignite/ignite:3.1.0 cli cluster init --name=mycluster
+  cluster-init:
+    image: apacheignite/ignite:3.1.0
+    depends_on:
+      node3:
+        condition: service_started
+
+    command: ["cli", "cluster", "init", "--name=mycluster"]
+    network_mode: host
+    restart: "no"
+

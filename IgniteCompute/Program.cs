@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Apache.Ignite;
+
+var cfg = new IgniteClientConfiguration("localhost");
+using var client = await IgniteClient.StartAsync(cfg);
