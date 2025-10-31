@@ -1,2 +1,10 @@
-# ignite3-dotnet-compute
-Ignite 3 .NET Compute Examples
+# Ignite 3.1 .NET Compute Demo
+
+Start the cluster and run the demo:
+
+```bash
+docker-compose up -d
+cd IgniteCompute
+dotnet run
+```
+
