@@ -10,11 +10,11 @@ using var client = await IgniteClient.StartAsync(cfg);
 IList<IClusterNode> nodes = await client.GetClusterNodesAsync();
 Console.WriteLine($"Nodes: {string.Join(", ", nodes)}");
 
-DeploymentUnit deploymentUnit = await ManagementApi.DeployExecutingAssembly("IgniteComputeDemo");
+DeploymentUnit deploymentUnit = await ManagementApi.DeployAssembly<HelloJob>("IgniteComputeDemo");
 Console.WriteLine($"Unit deployed: {deploymentUnit}");
 
 var anyNodeTarget = JobTarget.AnyNode(nodes);
-var helloJobDesc = JobDescriptor.Of(new HelloJob());
+var helloJobDesc = JobDescriptor.Of(new HelloJob()) with { DeploymentUnits = [deploymentUnit] };
 
 IJobExecution<string> jobExec = await client.Compute.SubmitAsync(anyNodeTarget, helloJobDesc, "Ignite");
 Console.WriteLine("Job result: " + await jobExec.GetResultAsync());

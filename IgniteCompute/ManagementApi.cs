@@ -46,16 +46,16 @@ public class ManagementApi
         await client.DeleteAsync(GetUnitUrl(unit.Name, unit.Version).Uri);
     }
 
-    public static async Task<DeploymentUnit> DeployExecutingAssembly(string unitId, string? unitVersion = null)
+    public static async Task<DeploymentUnit> DeployAssembly<T>(string unitId, string? unitVersion = null)
     {
-        var testsDll = Assembly.GetExecutingAssembly().Location;
+        var dllFile = typeof(T).Assembly.Location;
 
         var unitVersion0 = unitVersion ?? GetRandomUnitVersion();
 
         return await UnitDeploy(
             unitId: unitId,
             unitVersion: unitVersion0,
-            unitContent: [testsDll]);
+            unitContent: [dllFile]);
     }
 
     public static string GetRandomUnitVersion() => DateTime.Now.TimeOfDay.ToString(@"m\.s\.f");

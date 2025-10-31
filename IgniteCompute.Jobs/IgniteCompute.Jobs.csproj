@@ -7,9 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Apache.Ignite">
-        <HintPath>..\..\..\.nuget\packages\apache.ignite\3.1.0\lib\net8.0\Apache.Ignite.dll</HintPath>
-      </Reference>
+        <PackageReference Include="Apache.Ignite" Version="3.1.0" />
     </ItemGroup>
-
+    
 </Project>
