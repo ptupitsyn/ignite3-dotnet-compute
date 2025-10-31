@@ -1,12 +1,11 @@
 using System.Net.Http.Headers;
-using System.Reflection;
 using Apache.Ignite.Compute;
 
-namespace IgniteCompute;
+namespace IgniteCompute.Jobs;
 
-public class ManagementApi
+public static class ManagementApi
 {
-     private const string BaseUri = "http://localhost:10300";
+    private const string BaseUri = "http://localhost:10300";
 
     public static async Task<DeploymentUnit> UnitDeploy(string unitId, string unitVersion, IList<string> unitContent)
     {
@@ -61,5 +60,8 @@ public class ManagementApi
     public static string GetRandomUnitVersion() => DateTime.Now.TimeOfDay.ToString(@"m\.s\.f");
 
     private static UriBuilder GetUnitUrl(string unitId, string unitVersion) =>
-        new(BaseUri) { Path = $"/management/v1/deployment/units/{Uri.EscapeDataString(unitId)}/{Uri.EscapeDataString(unitVersion)}" };
+        new(BaseUri)
+        {
+            Path = $"/management/v1/deployment/units/{Uri.EscapeDataString(unitId)}/{Uri.EscapeDataString(unitVersion)}"
+        };
 }
